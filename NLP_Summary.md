@@ -1,6 +1,6 @@
 ---
 layout: page
-title: NLP_Summary
+title: NLP Summary
 permalink: /NLP_Summary/
 ---
 

@@ -98,7 +98,7 @@ For transformers, the embedding works by adding the following things together:
 3. positional embedding: the calculated output according to the position of tokens in the sentence
 
 
-![Positional Embedding Formula](/img/Transformer_Positional_Embedding.png#pic_center "Positional Embedding")
+![Positional Embedding Formula](assets/img/Transformer_Positional_Embedding.png#pic_center "Positional Embedding")
 
 As we can see in the photo, for the original paper, they used sine and cosine functions to calculate the value. This is one method of calculating positional embedding and the output ranged from -1 to 1 because of sine and consine functions. 
 
@@ -112,7 +112,7 @@ Now we have everything we need for inputs of transformers. Irl, the embedding pr
 
 The following is the transformer architecture.
 
-![Transformer Architecture from the original paper](/img/Transformer_Architecture.png#pic_center "Model Architecture")
+![Transformer Architecture from the original paper](assets/img/Transformer_Architecture.png#pic_center "Model Architecture")
 
 After adding positional embedding, we moved to the large grey box here. Ignoring the fancy words such as multi-head attention for a minute, we can see that these two grey boxes are the main parts of the models. The left one is encoder, as its name, encoding the information learnt by the model; the right one is decoder, decoding the understanding of machine into human readable information. We can already know that the encoder is for the NLU, while the decoder is for the NLG by their names. 
 
@@ -122,7 +122,7 @@ For the machine translation task here, we needs both because we want the machine
 
 Also, you can notice the ***Nx*** next to the grey boxes. each encoder or decoder is called a layer, (input -> layer -> output). Transformers used 6 identical layers, which means N = 6. The following is the illustrative graph from Jay Alammar's website:
 
-![Encoder-Decoder Abstract Explanation in Transformers](/img/Encoder-Decoder.png#pic_center "Encoder-Decoder")
+![Encoder-Decoder Abstract Explanation in Transformers](assets/img/Encoder-Decoder.png#pic_center "Encoder-Decoder")
 
 A single token (transcripted into vectors) passed 6 encoder layers to generate understanding of the token, then passing to each decoder layer. Together with the "previous generated words", the decoder generate the next words in natural language. 
 
@@ -130,11 +130,11 @@ A single token (transcripted into vectors) passed 6 encoder layers to generate u
 
 Now, we will move to the most important part of transformer. The word "Multi-head" just means many replicate attentions, so we can first figure out what is attention. Here is an example used by Jay Alammar. 
 
-![Self-Attention Mechanism Illustration](/img/Self-Attention.png#pic_center)
+![Self-Attention Mechanism Illustration](assets/img/Self-Attention.png#pic_center)
 
 In transformer, the model needs to compare the token with other tokens in the same sentence to understand the semantic meaning, just like reading through context. In this way, the model has three vital vectors, q (query), k (key), and v(value). All of them are corresponding to the same sentence with equal length. However, each of them contains different value (meanings). The vector on the right in the above picture is query, the model travers all the tokens of query and "compares" with the whole key find how much they are relative. Then, the author applies a division of 8 = sqrt(dimension of each token). The paper sets the dimension of each token as 64, using 64 "features" to represent each token. Then applys softmax, a function maps everything to 0-1, and multiply with the value vectors. Noticed that at this step, the token with lower softmax value will result lower weights after multiplication. 
 
-![Self-Attention calculation](/img/self-attention-calculation.png)
+![Self-Attention calculation](assets/img/self-attention-calculation.png)
 
 Notice that "value" vector is not the score, the output of the whole calculation will be the scores, which captures the semantic meaning of a particular token according to context. For matrix multiplication: 
 
@@ -178,7 +178,7 @@ First, the decoder will also accept the previous output ( by previous decoder la
 Secondly, the decoder has a "masked multi-head attention". Altough we want the model generate the next token without bias from the "future tokens", the model recieved the "predictions of whole sentence" from the previous encoder layer as a whole. Then how does the transformer achieve this goal? The model will change the score of those "future tokens" (by checking their positions) to a huge negative number. In this way, the softmax function applied to them will mark them as 0, and machine will pay zero attention on them.
 
 
-![Entire Process of the Encoder-Decoder Structure](/img/Entire_Process.png#pic_center)
+![Entire Process of the Encoder-Decoder Structure](assets/img/Entire_Process.png#pic_center)
 
 This is a general look of the whole process by Jay Alammar. 
 

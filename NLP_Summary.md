@@ -139,9 +139,9 @@ In transformer, the model needs to compare the token with other tokens in the sa
 Notice that "value" vector is not the score, the output of the whole calculation will be the scores, which captures the semantic meaning of a particular token according to context. For matrix multiplication: 
 
 
-$$
+$
 softmax(\frac{Q \times K^{T}}{\sqrt{d_{k}}}) \times V = Z
-$$
+$
 
  
 Z is the self-attention scores that we want.

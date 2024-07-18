@@ -1,5 +1,6 @@
 ---
 layout: page
+mathjax: true
 title: NLP Summary
 permalink: /NLP_Summary/
 ---
